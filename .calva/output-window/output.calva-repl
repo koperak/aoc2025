@@ -1,0 +1,710 @@
+; This is the Calva REPL Window.
+; It's just a file, really, with some special treatment from Calva.
+; Use it as a REPL input prompt if you like. (When the REPL is connected.)
+; TIPS: The keyboard shortcut `ctrl+alt+o r` shows and focuses this window
+; Please see https://calva.io/repl-window/ for more info.
+; Happy coding! ♥️
+
+; TIPS: As with any Clojure file when the REPL is connected:
+; - `alt+enter` evaluates the current top level form.
+; - `ctrl+enter` evaluates the current form.
+; Special for this file:
+; - `alt+up` and `alt+down` traverse up and down the REPL command history
+;    when the cursor is after the last contents at the prompt
+; 
+; See also the Calva Inspector: https://calva.io/inspector/
+
+PLEASE NOTE
+We will update the default location of this file.
+The new default location will be
+  "<projectRootPath>/.calva/repl.calva-repl"
+For now the legacy path is used by default.
+To give yourself a smooth transition, you can opt in
+to the change, by configuring this setting as false:
+  "calva.useLegacyReplWindowPath"
+and then add "**/.calva/repl.calva-repl" to your ".gitignore" file.
+
+
+This file is configured as the output destination for all REPL output.
+You can configure this with the setting:
+  "calva.outputDestinations"
+
+
+; Jacking in...
+; Connecting using "Leiningen" project type.
+; You can make Calva auto-select this.
+;   - See https://calva.io/connect-sequences/
+; 
+
+; Starting Jack-in: (cd /home/koperak/devel/clojure/aoc2025; lein update-in :dependencies conj '[nrepl,"1.5.1"]' -- update-in :plugins conj '[cider/cider-nrepl,"0.58.0"]' -- update-in '[:repl-options,:nrepl-middleware]' conj '["cider.nrepl/cider-middleware"]' -- repl :headless)
+; Using host:port 127.0.0.1:45353 ...
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+(when-let [requires (resolve 'clojure.main/repl-requires)] (clojure.core/apply clojure.core/require @requires))
+nil
+clj꞉aoc2025.day01꞉> 
+"Please see https://calva.io/output/#about-stdout-in-the-repl-window
+about why stdout printed to this file is prepended with `;` to be line comments."
+clj꞉aoc2025.day01꞉> 
+; Jack-in done.
+clj꞉aoc2025.day01꞉> 
+(rotate 50 "L" 68)
+82
+clj꞉aoc2025.day01꞉> 
+(rotate (rotate 50 "L" 68) "L" 30)
+52
+clj꞉aoc2025.day01꞉> 
+(defn part1
+  [input]
+  (->> (clojure.string/split-lines input)
+       (map #(re-matches #"(L|R{1})(\d+)"))))
+#'aoc2025.day01/part1
+clj꞉aoc2025.day01꞉> 
+(deftest day01
+  (testing "part1"
+    (let [test-input "L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82"   ;; dane testowe tu
+          expected 3]                     ;; oczekiwany wynik
+      (is (= expected (day01/part1 test-input)))))
+
+  (testing "part2"
+    (let [test-input "ABC"
+          expected   198]                    ;; przykładowa wartość
+      (is (= expected (day01/part2 test-input))))))
+#'aoc2025.core-test/day01
+clj꞉aoc2025.core-test꞉> 
+(day01/part1 test-input)
+; Syntax error compiling at (test/aoc2025/core_test.clj:20:23).
+; Unable to resolve symbol: test-input in this context
+clj꞉aoc2025.core-test꞉> 
+"L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82"
+"L68\nL30\nR48\nL5\nR60\nL55\nL1\nL99\nR14\nL82"
+clj꞉aoc2025.core-test꞉> 
+(day01/part1 test-input)
+; Syntax error compiling at (test/aoc2025/core_test.clj:20:23).
+; Unable to resolve symbol: test-input in this context
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+;   aoc2025.core
+
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; ERROR in aoc2025.core-test/day01 (AFn.java:20):
+; part1
+; error: clojure.lang.ArityException: Wrong number of args (1) passed to: aoc2025.day01/part1/fn--10513 (AFn.java:20)
+; expected:
+(= expected (day01/part1 test-input))
+
+; 2 tests finished, problems found. 😭 errors: 1, failures: 0, ns: 1, vars: 1
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.core-test꞉> 
+clj꞉aoc2025.day01꞉> 
+; ERROR in aoc2025.core-test/day01 (AFn.java:20):
+; part1
+; error: clojure.lang.ArityException: Wrong number of args (1) passed to: aoc2025.day01/part1/fn--10513 (AFn.java:20)
+; expected:
+(= expected (day01/part1 test-input))
+
+; 2 tests finished, problems found. 😭 errors: 1, failures: 0, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; ERROR in aoc2025.core-test/day01 (AFn.java:20):
+; part1
+; error: clojure.lang.ArityException: Wrong number of args (1) passed to: aoc2025.day01/part1/fn--10513 (AFn.java:20)
+; expected:
+(= expected (day01/part1 test-input))
+
+; 2 tests finished, problems found. 😭 errors: 1, failures: 0, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+(defn part1
+  [input]
+  (->> (string/split-lines input)
+       (map #(re-matches #"(L|R{1})(\d+)" %))))
+; Syntax error compiling at (src/aoc2025/day01.clj:16:8).
+; No such namespace: string
+clj꞉aoc2025.day01꞉> 
+(ns aoc2025.day01
+  (:gen-class)
+  (:require
+   [clojure.string :as string]))
+nil
+clj꞉aoc2025.day01꞉> 
+(defn part1
+  [input]
+  (->> (string/split-lines input)
+       (map #(re-matches #"(L|R{1})(\d+)" %))))
+#'aoc2025.day01/part1
+clj꞉aoc2025.day01꞉> 
+(day01/part1 test-input)
+; Syntax error compiling at (test/aoc2025/core_test.clj:20:23).
+; Unable to resolve symbol: test-input in this context
+clj꞉aoc2025.core-test꞉> 
+"L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82"
+"L68\nL30\nR48\nL5\nR60\nL55\nL1\nL99\nR14\nL82"
+clj꞉aoc2025.core-test꞉> 
+(day01/part1 test-input)
+; Syntax error compiling at (test/aoc2025/core_test.clj:20:23).
+; Unable to resolve symbol: test-input in this context
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L68" "L" "68"]
+   ["L30" "L" "30"]
+   ["R48" "R" "48"]
+   ["L5" "L" "5"]
+   ["R60" "R" "60"]
+   ["L55" "L" "55"]
+   ["L1" "L" "1"]
+   ["L99" "L" "99"]
+   ["R14" "R" "14"]
+   ["L82" "L" "82"])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L68" "L" "68"]
+   ["L30" "L" "30"]
+   ["R48" "R" "48"]
+   ["L5" "L" "5"]
+   ["R60" "R" "60"]
+   ["L55" "L" "55"]
+   ["L1" "L" "1"]
+   ["L99" "L" "99"]
+   ["R14" "R" "14"]
+   ["L82" "L" "82"])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+(mapv fn([_ dir step] [dir (Long/parseLong step)]))
+; Syntax error compiling at (src/aoc2025/day01.clj:18:8).
+; Can't take value of a macro: #'clojure.core/fn
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L68" "L" "68"]
+   ["L30" "L" "30"]
+   ["R48" "R" "48"]
+   ["L5" "L" "5"]
+   ["R60" "R" "60"]
+   ["L55" "L" "55"]
+   ["L1" "L" "1"]
+   ["L99" "L" "99"]
+   ["R14" "R" "14"]
+   ["L82" "L" "82"])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L68" "L" "68"]
+   ["L30" "L" "30"]
+   ["R48" "R" "48"]
+   ["L5" "L" "5"]
+   ["R60" "R" "60"]
+   ["L55" "L" "55"]
+   ["L1" "L" "1"]
+   ["L99" "L" "99"]
+   ["R14" "R" "14"]
+   ["L82" "L" "82"])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L68" "L" "68"]
+   ["L30" "L" "30"]
+   ["R48" "R" "48"]
+   ["L5" "L" "5"]
+   ["R60" "R" "60"]
+   ["L55" "L" "55"]
+   ["L1" "L" "1"]
+   ["L99" "L" "99"]
+   ["R14" "R" "14"]
+   ["L82" "L" "82"])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L68" "L" "68"]
+   ["L30" "L" "30"]
+   ["R48" "R" "48"]
+   ["L5" "L" "5"]
+   ["R60" "R" "60"]
+   ["L55" "L" "55"]
+   ["L1" "L" "1"]
+   ["L99" "L" "99"]
+   ["R14" "R" "14"]
+   ["L82" "L" "82"])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L68" "L" "68"]
+   ["L30" "L" "30"]
+   ["R48" "R" "48"]
+   ["L5" "L" "5"]
+   ["R60" "R" "60"]
+   ["L55" "L" "55"]
+   ["L1" "L" "1"]
+   ["L99" "L" "99"]
+   ["R14" "R" "14"]
+   ["L82" "L" "82"])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L68" "L" "68"]
+   ["L30" "L" "30"]
+   ["R48" "R" "48"]
+   ["L5" "L" "5"]
+   ["R60" "R" "60"]
+   ["L55" "L" "55"]
+   ["L1" "L" "1"]
+   ["L99" "L" "99"]
+   ["R14" "R" "14"]
+   ["L82" "L" "82"])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+(defn part1
+  [input]
+  (->> (string/split-lines input)
+       (map #(re-matches #"(L|R{1})(\d+)" %))
+       (map (fn [[_ dir step]] (vector dir (Long/parseLong step))))))
+#'aoc2025.day01/part1
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L" 68]
+   ["L" 30]
+   ["R" 48]
+   ["L" 5]
+   ["R" 60]
+   ["L" 55]
+   ["L" 1]
+   ["L" 99]
+   ["R" 14]
+   ["L" 82])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not
+ (=
+  3
+  (["L" 68]
+   ["L" 30]
+   ["R" 48]
+   ["L" 5]
+   ["R" 60]
+   ["L" 55]
+   ["L" 1]
+   ["L" 99]
+   ["R" 14]
+   ["L" 82])))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+(defn part1
+  [input]
+
+  (reductions rotate 50 (->> (string/split-lines input)
+       (map #(re-matches #"(L|R{1})(\d+)" %))
+       (map (fn [[_ dir step]] (vector dir (Long/parseLong step)))))))
+#'aoc2025.day01/part1
+clj꞉aoc2025.day01꞉> 
+(defn part1
+  [input]
+
+  (reductions rotate 50 (->> (string/split-lines input)
+       (map #(re-matches #"(L|R{1})(\d+)" %))
+       (map (fn [[_ dir step]] (vector dir (Long/parseLong step)))))))
+#'aoc2025.day01/part1
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; ERROR in aoc2025.core-test/day01 (AFn.java:20):
+; part1
+; error: clojure.lang.ArityException: Wrong number of args (2) passed to: aoc2025.day01/rotate (AFn.java:20)
+; expected:
+(= expected (day01/part1 test-input))
+
+; 2 tests finished, problems found. 😭 errors: 1, failures: 0, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; ERROR in aoc2025.core-test/day01 (AFn.java:20):
+; part1
+; error: clojure.lang.ArityException: Wrong number of args (2) passed to: aoc2025.day01/rotate (AFn.java:20)
+; expected:
+(= expected (day01/part1 test-input))
+
+; 2 tests finished, problems found. 😭 errors: 1, failures: 0, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+(defn rotate [position [dir step]]
+  (case dir
+    "L" (mod (- position step) 100)
+    "R" (mod (+ position step) 100)))
+#'aoc2025.day01/rotate
+clj꞉aoc2025.day01꞉> 
+(rotate (rotate 50 ["L" 68]) ["L" 30])
+52
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+(defn part1
+  [input]
+  (reductions rotate 50 (->> (string/split-lines input)
+                             (map #(re-matches #"(L|R{1})(\d+)" %))
+                             (map (fn [[_ dir step]] (vector dir (Long/parseLong step)))))))
+#'aoc2025.day01/part1
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not (= 3 (50 82 52 0 95 55 0 99 0 14 32)))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not (= 3 (50 82 52 0 95 55 0 99 0 14 32)))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+(defn part1
+  [input]
+  (filter zero? (reductions rotate 50 (->> (string/split-lines input)
+                             (map #(re-matches #"(L|R{1})(\d+)" %))
+                             (map (fn [[_ dir step]] (vector dir (Long/parseLong step))))))))
+#'aoc2025.day01/part1
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not (= 3 (0 0 0)))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; FAIL in aoc2025.core-test/day01 (core_test.clj:20):
+; part1
+; expected:
+(= expected (day01/part1 test-input))
+
+; actual:
+(not (= 3 (0 0 0)))
+
+; 2 tests finished, problems found. 😭 errors: 0, failures: 1, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+(defn part1
+  [input]
+  (count (filter zero? (reductions rotate 50 (->> (string/split-lines input)
+                                                  (map #(re-matches #"(L|R{1})(\d+)" %))
+                                                  (map (fn [[_ dir step]] (vector dir (Long/parseLong step)))))))))
+#'aoc2025.day01/part1
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.core-test
+
+; 2 tests finished, all passing 👍, ns: 1, vars: 1
+clj꞉aoc2025.core-test꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
+(-> (slurp io/resource "day01/input")
+    part1)
+; Syntax error compiling at (src/aoc2025/day01.clj:26:5).
+; No such namespace: io
+clj꞉aoc2025.day01꞉> 
+(slurp io/resource "day01/input")
+; Syntax error compiling at (src/aoc2025/day01.clj:26:5).
+; No such namespace: io
+clj꞉aoc2025.day01꞉> 
+(ns aoc2025.day01
+  (:gen-class)
+  (:require
+   [clojure.java.io :as io]
+   [clojure.string :as string]))
+nil
+clj꞉aoc2025.day01꞉> 
+(-> (slurp io/resource "day01/input")
+    part1)
+; WARNING: (slurp f enc) is deprecated, use (slurp f :encoding enc).
+; Execution error (IllegalArgumentException) at aoc2025.day01/eval11094 (day01.clj:26).
+; Cannot open <#function[clojure.java.io/resource]> as an InputStream.
+clj꞉aoc2025.day01꞉> 
+(-> (slurp (io/resource "day01/input"))
+    part1)
+1018
+clj꞉aoc2025.day01꞉> 
+; Running tests for the following namespaces:
+;   aoc2025.day01
+;   aoc2025.day01-test
+
+; No tests found. 😱, ns: 0, vars: 0
+clj꞉aoc2025.day01꞉> 
