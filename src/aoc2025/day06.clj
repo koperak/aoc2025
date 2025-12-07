@@ -4,6 +4,7 @@
    [clojure.string :as str]
    [clojure.java.io :as io]))
 
+; part 1 - matematyka cefalopodów
 (defn parse-problems
   [input]
   (->> input
@@ -20,19 +21,15 @@
         arguments (mapv #(Integer/parseInt %) (rest problem))]
     (apply operation arguments)))
 
-(solve-problem '("*" "123" "45" "6"))
-
-(def test-input "123 328  51 64 
-45 64  387 23 
-6 98  215 314
-*   +   *   +  ")
-
-(->> test-input
-     parse-problems
-     (map solve-problem)
-     (apply +))
-
 (->> (slurp (io/resource "day06/input"))
      parse-problems
      (map solve-problem)
      (apply +))
+
+; part 2 - math is changing so code
+(defn identify-columns
+  [line]
+  (->> line
+       (map-indexed vector)
+       (filter #(not= (second %) \space))))
+
