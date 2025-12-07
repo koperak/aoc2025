@@ -7,41 +7,64 @@
 
 (defn rotate [position [dir step]]
   (case dir
-    "L" [(mod (- position step) 100) (quot (- position step) 100)]
-    "R" [(mod (+ position step) 100) (quot (- position step) 100)]))
+    "L" (mod (- position step) 100)
+    "R" (mod (+ position step) 100)))
 
-(defn part1
+#dbg
+ (defn part1
+   [input]
+   (->> input
+        string/split-lines
+        (map #(re-matches #"(L|R)(\d+)" %))
+        (map (fn [[_ dir step]] [dir (Long/parseLong step)]))
+        (reductions rotate 50)
+        (filter zero?)
+        count))
+
+#dbg
+ (part1 test-input)
+
+(defn rotate-once [position dir]
+  (case dir
+    "L" (mod (dec position) 100)
+    "R" (mod (inc position) 100)))
+
+(defn parse-instructions
   [input]
-  (count
-   (filter zero?
-           (reductions rotate 50 (->> (string/split-lines input)
-                                      (map #(re-matches #"(L|R{1})(\d+)" %))
-                                      (map (fn [[_ dir step]] (vector dir (Long/parseLong step)))))))))
+  (->> input
+       string/split-lines
+       (map #(re-matches #"(L|R)(\d+)" %))
+
+       (map (fn [[_ dir step]] [dir (Long/parseLong step 10)]))))
+
+(def test-input "L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82")
+
+(defn iterate-steps-from-start-count-zeros
+  [start [dir step]]
+  (->> (iterate #(rotate-once % dir) start)
+       (drop 1)
+       (take step)
+       (filter zero?)
+       (count)))
+
+(iterate-steps-from-start-count-zeros 50 ["L" 68])
+
 (defn part2
   [input]
-  ;; tu logika dla części 2
-  (apply + (map int input)))
-
-
-(comment
-  (rotate (rotate 50 ["L" 68]) ["L" 30])
-
-  (defn dial-path
-    [start dir steps]
-    (let [start (mod start 100)
-          sign  (case dir
-                  "R"  1
-                  "L" -1)]
-      ;; reductions robi: start -> (start+sign) -> (start+2*sign) -> ...
-      ;; My bierzemy TYLKO kolejne kroki, czyli drop 1.
-      (->> (reductions
-            (fn [pos _]
-              (mod (+ pos sign) 100))
-            start
-            (range steps))
-           (next))))   ;; usuwamy pozycję startową
-
-  (print (dial-path 50 "L" 68)))
+  (->> input
+       (parse-instructions)))
 
 (-> (slurp (io/resource "day01/input"))
     part1)
+
+(->> (slurp (io/resource "day01/input"))
+     parse-instructions)

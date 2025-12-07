@@ -6,5 +6,6 @@
   :dependencies [[org.clojure/clojure "1.11.1"]]
   :main ^:skip-aot aoc2025.day01
   :target-path "target/%s"
+  :test-paths ["test"]
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
